@@ -1,0 +1,38 @@
+/* -------------------------------------------- */
+/* NAME: Ryan Becotte         User ID: rrbecott */
+/* DUE DATE: 11/02/2020                         */
+/* PROGRAM ASSIGNMENT #3                        */
+/* FILE NAME: README                            */
+/* PROGRAM PURPOSE:                             */
+/*    README for prefix sum questions           */
+/* -------------------------------------------- */
+
+1.
+There are not any race conditions in this prefix sum computation. When the n
+threads are created, they all manipulate the global array B. However, these
+n threads manipulate different areas of the array B that no other one of the
+n threads manipulates. These n threads are joined so they execute all at once
+and wait for each other. Then, the next set of n threads manipulate data in
+the array B. No two threads are manipulating the same piece of data at the
+same time, so there are no race conditions.
+
+2.
+In each iteration, the elements are added to each other in a sort of merge.
+For the gap 2^0 - 2^k, elements are added to each other such that the
+elements 2^i - 2^k are prefix sums.
+
+3.
+No, it cannot be saved back into x[i]. This is because threads are running
+concurrently and can run out of order, so other threads may need the data
+in x[i] but it would be overwritten. Therefore, the threads would not be able
+to get the data needed.
+
+4.
+You could create n-1 threads and begin and join each of them sequentially.
+The formula would be:
+	for (i = 1; i < n; i++){
+		x[i] = x[i-1] + x[i];
+	}
+The threads would execute one at a time by using begin and join for each
+thread created to ensure that each thread finishes before the next thread
+begins.

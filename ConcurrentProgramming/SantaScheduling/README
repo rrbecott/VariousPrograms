@@ -1,0 +1,55 @@
+/* -------------------------------------------- */
+/* NAME: Ryan Becotte         User ID: rrbecott */
+/* DUE DATE: 11/20/2020                         */
+/* PROGRAM ASSIGNMENT #4                        */
+/* FILE NAME: README                            */
+/* PROGRAM PURPOSE:                             */
+/*    README for Santa Claus questions          */
+/* -------------------------------------------- */
+
+
+Question 1:
+I guarantee that only 3 elves will ask a question because my program has an
+elf counter(ecount) and a semaphore(ElfCheck). ElfCheck has an initial value
+of 3, so 3 processes can pass through it. Past the wait on ElfCheck, it
+adds 1 to ecount and checks if it equals 3. If it does, then the three elves
+can wake Santa. When Santa is finished helping the three elves, ecount gets
+decreased by 3 and ElfCheck gets signaled 3 times to let in 3 more elves.
+
+Question 2:
+No elf will leave before their question is answered because of the semaphore
+ElfQuestions which starts with the value 0. Any elf that gets past ElfCheck
+will wait on ElfQuestions. ElfQuestions only gets signaled once Santa is done
+answering the three elves' problems.
+
+Question 3:
+No other elves can cut in because of the semaphore ElfCheck, which only
+allows 3 elves through to Santa and only gets signaled once Santa is done
+answering those 3 elves' problems.
+
+Question 4:
+Santa only answers questions when he is not sleeping because once 3 elves
+have questions, they signal Santa to wake up and Santa only goes back to
+sleep from the Sleep function after he helps the elves.
+
+Question 5:
+Santa is wakened by the last reindeer because a counter(rcount) keeps 
+track of how many reindeer have returned and Santa is only signaled when
+rcount equals the total number of reindeer.
+
+Question 6:
+I make sure that Santa always helps reindeer first because when he is woken
+up, Santa first checks if all the reindeer back and then checks if there are
+three elves. This way, reindeer are helped before elves.
+
+Question 7:
+While Santa is attaching the sleigh, all reindeer have gone through a wait, so
+all reindeer are waiting for Santa. Santa then signals every reindeer to the
+next wait to wait for flying off. Then Santa signals all the reindeer to
+go for vacation.
+
+Question 8:
+While Santa is delivering, elves will not ask questions because there is a
+mutex(Mlock) on Santa's availability. Since Santa is delivering, the mutex
+is locked and the elves are waiting for it to unlock. The mutex unlocks when
+Santa releases his reindeer for vacation.
